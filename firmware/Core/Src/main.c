@@ -25,13 +25,11 @@
 #include "sdio.h"
 #include "spi.h"
 #include "tim.h"
-#include "usart.h"
 #include "usb_otg.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
 #include "datalogger.h"
 
 /* USER CODE END Includes */
@@ -103,7 +101,6 @@ int main(void)
   MX_SDIO_SD_Init();
   MX_SPI1_Init();
   MX_TIM2_Init();
-  MX_USART2_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
@@ -178,15 +175,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   {
     datalogger_imu_interrupcao();
   }
-}
-
-/* O printf sai pelo USART2 (PA2), 115200 8N1. Só tem conexão física na Black Pill:
- * na placa do projeto, PA2 não foi roteado. */
-int __io_putchar(int ch)
-{
-  uint8_t c = (uint8_t)ch;
-  HAL_UART_Transmit(&huart2, &c, 1, 2);
-  return ch;
 }
 
 /* USER CODE END 4 */

@@ -17,7 +17,7 @@
  */
 #include "datalogger.h"
 
-#include <stdio.h>
+#include <stdio.h> /* snprintf do cabeçalho */
 #include <string.h>
 
 #include "bme280.h"
@@ -32,12 +32,6 @@
 #include "spi.h"
 #include "tempo.h"
 
-#if CFG_DEBUG_UART
-#define LOG(...) printf(__VA_ARGS__)
-#else
-#define LOG(...) ((void)0)
-#endif
-
 #if (CFG_FILA_IMU & (CFG_FILA_IMU - 1)) != 0
 #error "CFG_FILA_IMU precisa ser potência de 2"
 #endif
@@ -50,7 +44,6 @@ typedef enum
   EST_SEM_CARTAO = 0,  /* aguardando cartão (ou tentando montar)  */
   EST_GRAVANDO,
   EST_CARTAO_CHEIO,
-  EST_PARADO,          /* gravação encerrada pelo botão            */
 } estado_t;
 
 typedef struct
@@ -273,11 +266,6 @@ static void imu_tentar_iniciar(void)
   {
     imu_ok = 1;
     imu_interrupcao_religar();
-    LOG("IMU ok (WHO_AM_I = 0x%02X)\r\n", imu.who_am_i);
-  }
-  else
-  {
-    LOG("IMU: falha na inicializacao (%d)\r\n", (int)st);
   }
 }
 
@@ -300,7 +288,6 @@ static void imu_supervisionar(uint32_t agora)
     /* Sem amostras: o sensor pode ter reiniciado (perdendo a configuração)
      * ou o DRDY ficou preso. Reconfigura do zero. */
     recuperacoes_imu++;
-    LOG("IMU: sem dados, reiniciando\r\n");
     t_tentativa_imu = agora;
     imu_tentar_iniciar();
     return;
@@ -318,7 +305,6 @@ static void imu_supervisionar(uint32_t agora)
     {
       imu_ok = 0;
       t_tentativa_imu = agora;
-      LOG("IMU: WHO_AM_I invalido, sensor perdido\r\n");
     }
   }
 }
@@ -329,19 +315,9 @@ static void imu_supervisionar(uint32_t agora)
 
 static void bme_tentar_iniciar(void)
 {
-  bme280_status_t st = bme280_iniciar(&bme);
-
-  bme_ok = (st == BME280_OK);
+  bme_ok = (bme280_iniciar(&bme) == BME280_OK);
   bme_valida = 0;
   bme_falhas = 0;
-  if (bme_ok)
-  {
-    LOG("BME280 ok\r\n");
-  }
-  else
-  {
-    LOG("BME280: falha na inicializacao (%d)\r\n", (int)st);
-  }
 }
 
 static void bme_supervisionar(uint32_t agora)
@@ -377,7 +353,6 @@ static void bme_supervisionar(uint32_t agora)
     bme_ok = 0;
     bme_valida = 0;
     t_tentativa_bme = agora;
-    LOG("BME280: leituras falhando, sensor perdido\r\n");
   }
 }
 
@@ -500,19 +475,16 @@ static void iniciar_arquivo(void)
     texto_len = 0;
     t_sync = HAL_GetTick();
     estado = EST_GRAVANDO;
-    LOG("Gravando em %s\r\n", registro_nome_arquivo());
   }
   else if (r == REG_CHEIO)
   {
     registro_fechar();
     estado = EST_CARTAO_CHEIO;
-    LOG("Cartao cheio\r\n");
   }
   else
   {
     registro_desmontar();
     estado = EST_SEM_CARTAO;
-    LOG("Erro ao criar arquivo\r\n");
   }
 }
 
@@ -527,14 +499,12 @@ static void tratar_resultado(reg_status_t r)
   {
     registro_fechar();
     estado = EST_CARTAO_CHEIO;
-    LOG("Cartao cheio: gravacao encerrada\r\n");
   }
   else
   {
     registro_desmontar();
     estado = EST_SEM_CARTAO;
     t_tentativa_cartao = HAL_GetTick();
-    LOG("Erro de escrita no cartao: remontando\r\n");
   }
 }
 
@@ -552,14 +522,10 @@ static void cartao_tentar(uint32_t agora)
   }
   if (registro_montar() != REG_OK)
   {
-    LOG("Cartao presente, mas nao montou\r\n");
     registro_desmontar();
     return;
   }
-  if (registro_acertar_rtc_por_arquivo())
-  {
-    LOG("RTC acertado por RTC.TXT\r\n");
-  }
+  registro_acertar_rtc_por_arquivo();
   iniciar_arquivo();
 }
 
@@ -610,7 +576,7 @@ static reg_status_t processar_gravacao(uint32_t agora)
 }
 
 /* ========================================================================= */
-/* LED, botão e watchdog                                                     */
+/* LED e watchdog                                                            */
 /* ========================================================================= */
 
 static void led_atualizar(uint32_t agora)
@@ -635,35 +601,12 @@ static void led_atualizar(uint32_t agora)
       aceso = (agora % 200u) < 100u;                         /* rápido, 5 Hz      */
       break;
     case EST_CARTAO_CHEIO:
-      aceso = 1;                                             /* aceso direto      */
-      break;
-    case EST_PARADO:
     default:
-      aceso = (agora % 2000u) < 1000u;                       /* lento, 0,5 Hz     */
+      aceso = 1;                                             /* aceso direto      */
       break;
   }
   /* LED ligado entre 3V3 (via R12) e PC13: acende com nível baixo */
   HAL_GPIO_WritePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin, aceso ? GPIO_PIN_RESET : GPIO_PIN_SET);
-}
-
-static int botao_pressionado(uint32_t agora)
-{
-  static uint8_t estavel = 1;
-  static uint8_t anterior = 1;
-  static uint32_t t_mudanca;
-  uint8_t lido = (uint8_t)HAL_GPIO_ReadPin(BTN_USER_GPIO_Port, BTN_USER_Pin);
-
-  if (lido != anterior)
-  {
-    anterior = lido;
-    t_mudanca = agora;
-  }
-  else if (lido != estavel && agora - t_mudanca >= 30u)
-  {
-    estavel = lido;
-    return estavel == 0; /* ativo em nível baixo (pull-up interno) */
-  }
-  return 0;
 }
 
 static void watchdog_iniciar(void)
@@ -736,7 +679,6 @@ void datalogger_iniciar(void)
   bme.atraso_ms = atraso_ms;
   bme.ctx = NULL;
 
-  LOG("\r\ndatalogger-epta firmware " FIRMWARE_VERSAO " (reset: %s)\r\n", causa_reset);
 
   imu_tentar_iniciar();
   bme_tentar_iniciar();
@@ -753,7 +695,6 @@ void datalogger_iniciar(void)
 void datalogger_executar(void)
 {
   uint32_t agora = HAL_GetTick();
-  int botao;
   int cartao_presente;
 
   watchdog_alimentar();
@@ -761,7 +702,6 @@ void datalogger_executar(void)
 
   imu_supervisionar(agora);
   bme_supervisionar(agora);
-  botao = botao_pressionado(agora);
   cartao_presente = (BSP_SD_IsDetected() == SD_PRESENT);
 
   switch (estado)
@@ -774,21 +714,9 @@ void datalogger_executar(void)
     case EST_GRAVANDO:
       if (!cartao_presente)
       {
-        LOG("Cartao removido\r\n");
         registro_desmontar();
         texto_len = 0;
         estado = EST_SEM_CARTAO;
-      }
-      else if (botao)
-      {
-        reg_status_t r = descarregar_texto();
-        if (r == REG_OK)
-        {
-          r = registro_sincronizar();
-        }
-        registro_fechar();
-        estado = EST_PARADO;
-        LOG("Gravacao encerrada pelo botao (%d)\r\n", (int)r);
       }
       else
       {
@@ -797,16 +725,12 @@ void datalogger_executar(void)
       break;
 
     case EST_CARTAO_CHEIO:
-    case EST_PARADO:
+      /* Fica parado até o cartão ser trocado */
       fila_descartar();
       if (!cartao_presente)
       {
         registro_desmontar();
         estado = EST_SEM_CARTAO;
-      }
-      else if (estado == EST_PARADO && botao)
-      {
-        iniciar_arquivo();
       }
       break;
   }

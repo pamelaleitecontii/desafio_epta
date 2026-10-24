@@ -21,7 +21,6 @@
 #define CFG_BUFFER_TEXTO          8192u    /* bytes de CSV acumulados antes do f_write    */
 #define CFG_LIMIAR_ESCRITA        4096u
 #define CFG_WATCHDOG              1        /* 0 desliga o IWDG (útil para depurar)        */
-#define CFG_DEBUG_UART            1        /* mensagens no USART2 (PA2), só na Black Pill */
 
 void datalogger_iniciar(void);
 void datalogger_executar(void);
