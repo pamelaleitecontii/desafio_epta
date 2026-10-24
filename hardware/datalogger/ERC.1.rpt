@@ -1,0 +1,26 @@
+ERC report (2026-10-24T17:53:44, Encoding UTF8)
+Report includes: Errors, Warnings, Exclusions
+
+***** Sheet /
+[pin_to_pin]: Conflict problem between pins
+    ; warning (excluded)
+    @(9400 mils, 8050 mils): Symbol U4 Pin 5 [SDO, Bidirecional, Linha]
+[pin_to_pin]: Os pinos do tipo Bidirecional e Alimentação de saída estão conectados
+    ; warning (excluded)
+    @(9400 mils, 8050 mils): Symbol U4 Pin 5 [SDO, Bidirecional, Linha]
+    @(2300 mils, 2850 mils): Symbol #FLG01 Pin 1 [Alimentação de saída, Linha]
+[pin_to_pin]: Conflict problem between pins
+    ; warning (excluded)
+    @(13300 mils, 8150 mils): Symbol U5 Pin 2 [SDX, Bidirecional, Linha]
+[pin_to_pin]: Os pinos do tipo Bidirecional e Alimentação de saída estão conectados
+    ; warning (excluded)
+    @(13300 mils, 8150 mils): Symbol U5 Pin 2 [SDX, Bidirecional, Linha]
+    @(2300 mils, 2850 mils): Symbol #FLG01 Pin 1 [Alimentação de saída, Linha]
+
+ ** ERC messages: 4  Errors 0  Warnings 4
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters

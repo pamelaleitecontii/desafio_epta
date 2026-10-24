@@ -1,0 +1,266 @@
+Alterar FB1 do campo 'Datasheet' para o valor ''.
+Adicionar FB1 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir FB1 do campo 'Fabricante.'
+Excluir FB1 do campo 'Fornecedor.'
+Excluir FB1 do campo 'MPN.'
+Excluir J1 do campo 'Fabricante.'
+Excluir J1 do campo 'Fornecedor.'
+Excluir J1 do campo 'MPN.'
+Alterar C1 do campo 'Datasheet' para o valor ''.
+Adicionar C1 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C1 do campo 'Fabricante.'
+Excluir C1 do campo 'Fornecedor.'
+Excluir C1 do campo 'MPN.'
+Alterar Y1 do campo 'Datasheet' para o valor ''.
+Adicionar Y1 do campo 'KiLib_Generator' com o valor 'crystal_resonator_oscillator'.
+Excluir Y1 do campo 'Fabricante.'
+Excluir Y1 do campo 'Fornecedor.'
+Excluir Y1 do campo 'MPN.'
+Alterar C20 do campo 'Datasheet' para o valor ''.
+Adicionar C20 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C20 do campo 'Fabricante.'
+Excluir C20 do campo 'Fornecedor.'
+Excluir C20 do campo 'MPN.'
+Altera TP7 'Excluir da lista de materiais' de 'verdadeiro' para 'falso'.
+Alterar TP7 do campo 'Datasheet' para o valor ''.
+Excluir TP7 do campo 'Fabricante.'
+Excluir TP7 do campo 'Fornecedor.'
+Excluir TP7 do campo 'MPN.'
+Alterar C24 do campo 'Datasheet' para o valor ''.
+Adicionar C24 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C24 do campo 'Fabricante.'
+Excluir C24 do campo 'Fornecedor.'
+Excluir C24 do campo 'MPN.'
+Adicionar U2 do campo 'KiLib_Generator' com o valor 'package/gullwing'.
+Excluir U2 do campo 'Fabricante.'
+Excluir U2 do campo 'Fornecedor.'
+Excluir U2 do campo 'MPN.'
+Alterar C2 do campo 'Datasheet' para o valor ''.
+Adicionar C2 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C2 do campo 'Fabricante.'
+Excluir C2 do campo 'Fornecedor.'
+Excluir C2 do campo 'MPN.'
+Altera TP3 'Excluir da lista de materiais' de 'verdadeiro' para 'falso'.
+Alterar TP3 do campo 'Datasheet' para o valor ''.
+Excluir TP3 do campo 'Fabricante.'
+Excluir TP3 do campo 'Fornecedor.'
+Excluir TP3 do campo 'MPN.'
+Alterar SW2 do campo 'Datasheet' para o valor ''.
+Excluir SW2 do campo 'Fabricante.'
+Excluir SW2 do campo 'Fornecedor.'
+Excluir SW2 do campo 'MPN.'
+Alterar R2 do campo 'Datasheet' para o valor ''.
+Adicionar R2 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R2 do campo 'Fabricante.'
+Excluir R2 do campo 'Fornecedor.'
+Excluir R2 do campo 'MPN.'
+Alterar C23 do campo 'Datasheet' para o valor ''.
+Adicionar C23 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C23 do campo 'Fabricante.'
+Excluir C23 do campo 'Fornecedor.'
+Excluir C23 do campo 'MPN.'
+Alterar C21 do campo 'Datasheet' para o valor ''.
+Adicionar C21 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C21 do campo 'Fabricante.'
+Excluir C21 do campo 'Fornecedor.'
+Excluir C21 do campo 'MPN.'
+Alterar R10 do campo 'Datasheet' para o valor ''.
+Adicionar R10 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R10 do campo 'Fabricante.'
+Excluir R10 do campo 'Fornecedor.'
+Excluir R10 do campo 'MPN.'
+Altera TP6 'Excluir da lista de materiais' de 'verdadeiro' para 'falso'.
+Alterar TP6 do campo 'Datasheet' para o valor ''.
+Excluir TP6 do campo 'Fabricante.'
+Excluir TP6 do campo 'Fornecedor.'
+Excluir TP6 do campo 'MPN.'
+Excluir J2 do campo 'Fabricante.'
+Excluir J2 do campo 'Fornecedor.'
+Excluir J2 do campo 'MPN.'
+Altere o valor C11 de '6.8pF' para '4.7pF'.
+Alterar C11 do campo 'Datasheet' para o valor ''.
+Adicionar C11 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C11 do campo 'Fabricante.'
+Excluir C11 do campo 'Fornecedor.'
+Excluir C11 do campo 'MPN.'
+Altere o valor C12 de '6.8pF' para '4.7pF'.
+Alterar C12 do campo 'Datasheet' para o valor ''.
+Adicionar C12 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C12 do campo 'Fabricante.'
+Excluir C12 do campo 'Fornecedor.'
+Excluir C12 do campo 'MPN.'
+Alterar Y2 do campo 'Datasheet' para o valor ''.
+Excluir Y2 do campo 'Fabricante.'
+Excluir Y2 do campo 'Fornecedor.'
+Excluir Y2 do campo 'MPN.'
+Alterar C15 do campo 'Datasheet' para o valor ''.
+Adicionar C15 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C15 do campo 'Fabricante.'
+Excluir C15 do campo 'Fornecedor.'
+Excluir C15 do campo 'MPN.'
+Alterar R8 do campo 'Datasheet' para o valor ''.
+Adicionar R8 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R8 do campo 'Fabricante.'
+Excluir R8 do campo 'Fornecedor.'
+Excluir R8 do campo 'MPN.'
+Alterar C6 do campo 'Datasheet' para o valor ''.
+Adicionar C6 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C6 do campo 'Fabricante.'
+Excluir C6 do campo 'Fornecedor.'
+Excluir C6 do campo 'MPN.'
+Alterar D1 do campo 'Datasheet' para o valor ''.
+Adicionar D1 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir D1 do campo 'Fabricante.'
+Excluir D1 do campo 'Fornecedor.'
+Excluir D1 do campo 'MPN.'
+Alterar C8 do campo 'Datasheet' para o valor ''.
+Adicionar C8 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C8 do campo 'Fabricante.'
+Excluir C8 do campo 'Fornecedor.'
+Excluir C8 do campo 'MPN.'
+Alterar C9 do campo 'Datasheet' para o valor ''.
+Adicionar C9 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C9 do campo 'Fabricante.'
+Excluir C9 do campo 'Fornecedor.'
+Excluir C9 do campo 'MPN.'
+Alterar R12 do campo 'Datasheet' para o valor ''.
+Adicionar R12 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R12 do campo 'Fabricante.'
+Excluir R12 do campo 'Fornecedor.'
+Excluir R12 do campo 'MPN.'
+Alterar R7 do campo 'Datasheet' para o valor ''.
+Adicionar R7 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R7 do campo 'Fabricante.'
+Excluir R7 do campo 'Fornecedor.'
+Excluir R7 do campo 'MPN.'
+Alterar SW3 do campo 'Datasheet' para o valor ''.
+Excluir SW3 do campo 'Fabricante.'
+Excluir SW3 do campo 'Fornecedor.'
+Excluir SW3 do campo 'MPN.'
+Alterar C4 do campo 'Datasheet' para o valor ''.
+Adicionar C4 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C4 do campo 'Fabricante.'
+Excluir C4 do campo 'Fornecedor.'
+Excluir C4 do campo 'MPN.'
+Altera TP10 'Excluir da lista de materiais' de 'verdadeiro' para 'falso'.
+Alterar TP10 do campo 'Datasheet' para o valor ''.
+Excluir TP10 do campo 'Fabricante.'
+Excluir TP10 do campo 'Fornecedor.'
+Excluir TP10 do campo 'MPN.'
+Alterar R13 do campo 'Datasheet' para o valor ''.
+Adicionar R13 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R13 do campo 'Fabricante.'
+Excluir R13 do campo 'Fornecedor.'
+Excluir R13 do campo 'MPN.'
+Altera TP2 'Excluir da lista de materiais' de 'verdadeiro' para 'falso'.
+Alterar TP2 do campo 'Datasheet' para o valor ''.
+Excluir TP2 do campo 'Fabricante.'
+Excluir TP2 do campo 'Fornecedor.'
+Excluir TP2 do campo 'MPN.'
+Alterar C7 do campo 'Datasheet' para o valor ''.
+Adicionar C7 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C7 do campo 'Fabricante.'
+Excluir C7 do campo 'Fornecedor.'
+Excluir C7 do campo 'MPN.'
+Adicionar U3 do campo 'KiLib_Generator' com o valor 'package/gullwing'.
+Excluir U3 do campo 'Fabricante.'
+Excluir U3 do campo 'Fornecedor.'
+Excluir U3 do campo 'MPN.'
+Alterar R6 do campo 'Datasheet' para o valor ''.
+Adicionar R6 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R6 do campo 'Fabricante.'
+Excluir R6 do campo 'Fornecedor.'
+Excluir R6 do campo 'MPN.'
+Excluir U4 do campo 'Fabricante.'
+Excluir U4 do campo 'Fornecedor.'
+Excluir U4 do campo 'MPN.'
+Alterar C18 do campo 'Datasheet' para o valor ''.
+Adicionar C18 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C18 do campo 'Fabricante.'
+Excluir C18 do campo 'Fornecedor.'
+Excluir C18 do campo 'MPN.'
+Alterar C16 do campo 'Datasheet' para o valor ''.
+Adicionar C16 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C16 do campo 'Fabricante.'
+Excluir C16 do campo 'Fornecedor.'
+Excluir C16 do campo 'MPN.'
+Adicionar U1 do campo 'KiLib_Generator' com o valor 'package/no_lead'.
+Excluir U1 do campo 'Fabricante.'
+Excluir U1 do campo 'Fornecedor.'
+Excluir U1 do campo 'MPN.'
+Alterar R4 do campo 'Datasheet' para o valor ''.
+Adicionar R4 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R4 do campo 'Fabricante.'
+Excluir R4 do campo 'Fornecedor.'
+Excluir R4 do campo 'MPN.'
+Altera TP5 'Excluir da lista de materiais' de 'verdadeiro' para 'falso'.
+Alterar TP5 do campo 'Datasheet' para o valor ''.
+Excluir TP5 do campo 'Fabricante.'
+Excluir TP5 do campo 'Fornecedor.'
+Excluir TP5 do campo 'MPN.'
+Alterar C19 do campo 'Datasheet' para o valor ''.
+Adicionar C19 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C19 do campo 'Fabricante.'
+Excluir C19 do campo 'Fornecedor.'
+Excluir C19 do campo 'MPN.'
+Alterar R9 do campo 'Datasheet' para o valor ''.
+Adicionar R9 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R9 do campo 'Fabricante.'
+Excluir R9 do campo 'Fornecedor.'
+Excluir R9 do campo 'MPN.'
+Altera J3 'Não preencher' de 'verdadeiro' para 'falso'.
+Alterar J3 do campo 'Datasheet' para o valor ''.
+Adicionar J3 do campo 'KiLib_Generator' com o valor 'connector/pin_header_socket'.
+Excluir J3 do campo 'Fabricante.'
+Excluir J3 do campo 'Fornecedor.'
+Excluir J3 do campo 'MPN.'
+Alterar C3 do campo 'Datasheet' para o valor ''.
+Adicionar C3 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C3 do campo 'Fabricante.'
+Excluir C3 do campo 'Fornecedor.'
+Excluir C3 do campo 'MPN.'
+Alterar C14 do campo 'Datasheet' para o valor ''.
+Adicionar C14 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C14 do campo 'Fabricante.'
+Excluir C14 do campo 'Fornecedor.'
+Excluir C14 do campo 'MPN.'
+Alterar U5 do campo 'Datasheet' para o valor 'https://www.st.com/resource/en/datasheet/lsm6dsl.pdf'.
+Adicionar U5 do campo 'KiLib_Generator' com o valor 'package/no_lead'.
+Excluir U5 do campo 'Fabricante.'
+Excluir U5 do campo 'Fornecedor.'
+Excluir U5 do campo 'MPN.'
+Alterar R3 do campo 'Datasheet' para o valor ''.
+Adicionar R3 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R3 do campo 'Fabricante.'
+Excluir R3 do campo 'Fornecedor.'
+Excluir R3 do campo 'MPN.'
+Alterar C17 do campo 'Datasheet' para o valor ''.
+Adicionar C17 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C17 do campo 'Fabricante.'
+Excluir C17 do campo 'Fornecedor.'
+Excluir C17 do campo 'MPN.'
+Alterar C10 do campo 'Datasheet' para o valor ''.
+Adicionar C10 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C10 do campo 'Fabricante.'
+Excluir C10 do campo 'Fornecedor.'
+Excluir C10 do campo 'MPN.'
+Alterar C22 do campo 'Datasheet' para o valor ''.
+Adicionar C22 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C22 do campo 'Fabricante.'
+Excluir C22 do campo 'Fornecedor.'
+Excluir C22 do campo 'MPN.'
+Alterar R11 do campo 'Datasheet' para o valor ''.
+Adicionar R11 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R11 do campo 'Fabricante.'
+Excluir R11 do campo 'Fornecedor.'
+Excluir R11 do campo 'MPN.'
+Alterar C5 do campo 'Datasheet' para o valor ''.
+Adicionar C5 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir C5 do campo 'Fabricante.'
+Excluir C5 do campo 'Fornecedor.'
+Excluir C5 do campo 'MPN.'
+Alterar R5 do campo 'Datasheet' para o valor ''.
+Adicionar R5 do campo 'KiLib_Generator' com o valor 'SMD_2terminal_chip_molded'.
+Excluir R5 do campo 'Fabricante.'
+Excluir R5 do campo 'Fornecedor.'
+Excluir R5 do campo 'MPN.'

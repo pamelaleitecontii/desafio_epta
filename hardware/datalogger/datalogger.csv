@@ -1,0 +1,26 @@
+﻿Reference;Qty;Value;Footprint;Datasheet;MPN;Fabricante;Fornecedor
+C1,C3,C4,C7,C8,C17,C18,C19,C20,C21,C23,C24;12;100nF;Capacitor_SMD:C_0603_1608Metric;https://www.lcsc.com/product-detail/C1591.html;CL10B104KB8NNNC;Samsung Electro-Mechanics;LCSC C1591
+C2,C5;2;4.7µF;Capacitor_SMD:C_0603_1608Metric;https://www.lcsc.com/product-detail/C19666.html;CL10A475KO8NNNC;Samsung Electro-Mechanics;LCSC C19666
+C6,C15,C16;3;1µF;Capacitor_SMD:C_0603_1608Metric;https://www.lcsc.com/product-detail/C15849.html;CL10A105KB8NNNC;Samsung Electro-Mechanics;LCSC C15849
+C9,C10;2;10pF;Capacitor_SMD:C_0603_1608Metric;https://www.lcsc.com/product-detail/C1634.html;CL10C100JB8NNNC;Samsung Electro-Mechanics;LCSC C1634
+C11,C12;2;6.8pF;Capacitor_SMD:C_0603_1608Metric;https://www.lcsc.com/product-detail/C318672.html;CL10C6R8CB8NNNC;Samsung Electro-Mechanics;LCSC C318672
+C14;1;4.7nF;Capacitor_SMD:C_0603_1608Metric;https://www.lcsc.com/product-detail/C1621.html;CL10B472KB8NNNC;Samsung Electro-Mechanics;LCSC C1621
+C22;1;10µF;Capacitor_SMD:C_0603_1608Metric;https://www.lcsc.com/product-detail/C19702.html;CL10A106KP8NNNC;Samsung Electro-Mechanics;LCSC C19702
+D1;1;LED_Small;LED_SMD:LED_0603_1608Metric;https://optoelectronics.liteon.com/upload/download/DS22-2000-228/LTST-C191KGKT.PDF;LTST-C191KGKT;Lite-On;LCSC C125098
+FB1;1;600R@100MHz;Inductor_SMD:L_0603_1608Metric;https://www.lcsc.com/product-detail/C85833.html;BLM18KG601SN1D;Murata;LCSC C85833
+J1;1;USB_C_Receptacle_USB2.0_16P;Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12;https://www.lcsc.com/product-detail/C165948.html;TYPE-C-31-M-12;Korean Hroparts Elec (HRO);LCSC C165948
+J2;1;Micro_SD_Card_Det_Hirose_DM3AT;Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5;https://www.hirose.com/product/en/download_file/key_name/DM3/category/Catalog/doc_file_id/49662/?file_category_id=4&item_id=195&is_series=1;DM3AT-SF-PEJM5;Hirose;LCSC C114218
+J3;1;Conn_01x05_Pin;Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical;https://www.lcsc.com/datasheet/C7501583.pdf;PH2.54-01-05PZD;XUNPU;LCSC C7501583
+R2;1;1M;Resistor_SMD:R_0603_1608Metric;https://www.lcsc.com/product-detail/C105578.html;RC0603FR-071ML;Yageo;LCSC C105578
+R3,R4;2;5.1k;Resistor_SMD:R_0603_1608Metric;https://www.lcsc.com/product-detail/C105580.html;RC0603FR-075K1L;Yageo;LCSC C105580
+R5,R6;2;4.7k;Resistor_SMD:R_0603_1608Metric;https://www.lcsc.com/product-detail/C99782.html;RC0603FR-074K7L;Yageo;LCSC C99782
+R7,R8,R9,R10,R11,R13;6;10k;Resistor_SMD:R_0603_1608Metric;https://www.lcsc.com/product-detail/C98220.html;RC0603FR-0710KL;Yageo;LCSC C98220
+R12;1;1k;Resistor_SMD:R_0603_1608Metric;https://www.lcsc.com/product-detail/C22548.html;RC0603FR-071KL;Yageo;LCSC C22548
+SW2,SW3;2;SW_Push;Button_Switch_SMD:SW_SPST_B3U-1000P;https://www.lcsc.com/product-detail/C231329.html;B3U-1000P;Omron;LCSC C231329
+U1;1;STM32F411CEUx;Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm;https://www.st.com/resource/en/datasheet/stm32f411ce.pdf;STM32F411CEU6;STMicroelectronics;LCSC C60420
+U2;1;USBLC6-2SC6;Package_TO_SOT_SMD:SOT-23-6;https://www.st.com/resource/en/datasheet/usblc6-2.pdf;USBLC6-2SC6;STMicroelectronics;LCSC C7519
+U3;1;AP2112K-3.3;Package_TO_SOT_SMD:SOT-23-5;https://www.diodes.com/assets/Datasheets/AP2112.pdf;AP2112K-3.3TRG1;Diodes Inc.;LCSC C51118
+U4;1;BME280;Package_LGA:Bosch_LGA-8_2.5x2.5mm_P0.65mm_ClockwisePinNumbering;https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf;BME280;Bosch Sensortec;LCSC C92489
+U5;1;LSM6DSO;Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y;https://www.st.com/resource/en/datasheet/lsm6dso.pdf;LSM6DSOTR;STMicroelectronics;LCSC C2655100
+Y1;1;25MHz;Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm;https://www.lcsc.com/product-detail/C596913.html;ABM8G-25.000MHZ-B4Y-T;Abracon;LCSC C596913
+Y2;1;32.768kHz;Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm;https://www.lcsc.com/product-detail/C276424.html;ABS07-32.768KHZ-7-T;Abracon;LCSC C276424

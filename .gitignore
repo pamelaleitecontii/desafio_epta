@@ -1,0 +1,13 @@
+# Saída de compilação do STM32CubeIDE
+firmware/Debug/
+firmware/Release/
+
+# Arquivos locais do KiCad
+hardware/*-backups/
+hardware/fp-info-cache
+*.kicad_prl
+*.lck
+
+# Sistema
+desktop.ini
+Thumbs.db
