@@ -94,6 +94,8 @@ Registro das decisões tomadas ao longo do projeto, com a justificativa e a font
 
 **Justificativa:** o mesmo firmware roda na placa projetada e na Black Pill usada para validação, sem alterações.
 
+**Atualização:** como o PA0 (botão) e o PA2 e PA3 (USART2) não foram ligados na PCB, o botão BTN_USER e o USART2 foram desativados no CubeMX. O firmware não usa mais esses pinos, nem na Black Pill.
+
 **Fonte:** WeAct Studio, repositório MiniF4-STM32F4x1.
 
 ---
@@ -135,7 +137,7 @@ Registro das decisões tomadas ao longo do projeto, com a justificativa e a font
 ## 14. Configuração do SDIO e do FatFs
 
 **Decisões:**
-- SDIO em 4 bits, com fator de divisão de clock 2 (16 MHz no cartão), uma velocidade conservadora para a inicialização e a operação.
+- SDIO em 4 bits, com fator de divisão de clock 2. A frequência no cartão é o clock do SDIO dividido por (CLKDIV + 2), ou seja, 48 / 4 = **12 MHz**. Antes estava escrito 16 MHz, o que não bate com a fórmula do manual de referência (RM0383, registrador SDIO_CLKCR). É uma velocidade conservadora, que dá uns 6 MB/s teóricos, muito acima dos 40 kB/s gravados. A identificação do cartão é feita pela própria HAL a 400 kHz.
 - DMA habilitado para SDIO_RX e SDIO_TX, com interrupções habilitadas.
 - FatFs em modo SD Card, com detecção de cartão no PB1, nomes longos de arquivo (LFN) e setor de 512 bytes.
 
@@ -146,3 +148,76 @@ Registro das decisões tomadas ao longo do projeto, com a justificativa e a font
 **Situação:** para a validação, estavam disponíveis apenas uma Black Pill e um ST-Link, sem os módulos de sensores e de microSD.
 
 **Decisão:** validar em hardware tudo o que não depende dos módulos (gravação, clock, LED, botão, RTC, USB) e usar a ausência dos módulos para testar de fato o tratamento de erros exigido pelo desafio ("falha de sensor" e "cartão ausente"). A lógica independente de hardware (compensação do BME280, conversão das leituras do IMU, formatação do CSV) é testada no computador com valores de referência do datasheet.
+
+
+## 16. Correções na configuração do CubeMX
+
+Ao escrever o firmware, encontrei alguns problemas na configuração e corrigi tanto no `firmware.ioc` quanto no código gerado.
+
+| Problema | Correção |
+|---|---|
+| O rótulo `IMU_CS` estava no PA4 e também no PA2, que é o TX do USART2. Com isso o CubeMX gerou `IMU_CS_Pin` apontando para o PA2 e criou um `IMU_CSA4_Pin` para o PA4, ou seja, o nome `IMU_CS` apontava para o pino errado | Tirei o rótulo do PA2. Agora `IMU_CS_Pin` é o PA4, como na PCB |
+| O CS do IMU começava em nível baixo, deixando o sensor selecionado durante o boot | Nível inicial alto |
+| O SPI1 estava com divisor 2, o que dá 48 MHz, quase cinco vezes o máximo de 10 MHz do LSM6DSO | Divisor 16, o que dá 6 MHz |
+| O I2C1 estava em 100 kHz | 400 kHz, que o BME280 e os pull-ups de 4,7 kΩ suportam |
+| Todas as interrupções estavam com prioridade 0 | SDIO com 1, DMA com 2 e a interrupção do IMU com 5 (ver a decisão 18) |
+
+## 17. Leitura do IMU dentro da interrupção, com fila circular
+
+**Decisão:** a interrupção de dado pronto do IMU lê a amostra pelo SPI e a guarda numa fila de 2048 posições, junto com o tempo em microssegundos. O laço principal só formata e grava.
+
+**Justificativa:** uma escrita no microSD pode travar por centenas de milissegundos, e a especificação SD permite até 250 ms por bloco nos cartões SDHC. Se o IMU fosse lido no laço principal, cada pausa do cartão viraria um buraco nos dados. A leitura dentro da interrupção leva uns 30 µs a 6 MHz, o que ocupa cerca de 1,2 % da CPU a 416 Hz. A fila aguenta quase 5 s de atraso do cartão, e se mesmo assim encher, as amostras perdidas são contadas e gravadas na coluna `perdidas`, em vez de sumirem sem ninguém perceber.
+
+**Detalhe:** o pino de dado pronto fica em nível alto até a amostra ser lida. Se alguma leitura falhar, não aparece uma nova borda de subida e a aquisição pararia de vez. Por isso o firmware trata como falha qualquer intervalo de 50 ms sem amostras e configura o sensor de novo.
+
+## 18. Escrita no cartão por DMA
+
+**Decisão:** trocar as funções `BSP_SD_ReadBlocks` e `BSP_SD_WriteBlocks`, que no código gerado funcionam por polling, por versões com DMA, no arquivo `sd_dma.c`.
+
+**Justificativa:** no modo polling, a CPU precisa abastecer a FIFO de 32 palavras do SDIO a cada 20 µs, mais ou menos. A interrupção do IMU, que dura uns 30 µs, causaria erros de falta e de excesso de dados na FIFO. Com DMA, a transferência não depende da CPU. As funções originais são `__weak`, então a troca continua valendo mesmo depois de regenerar o código no CubeMX. O DMA foi configurado para acessar palavras de 32 bits, o que exige buffers alinhados em 4 bytes; quando o FatFs entrega um buffer desalinhado, os dados passam por um buffer intermediário.
+
+As interrupções do SDIO e do DMA ficaram com prioridade maior que a do IMU, para que o fim de uma transferência nunca precise esperar a leitura do sensor.
+
+## 19. Faixas e taxa do IMU
+
+**Decisão:** acelerômetro em ±16 g e giroscópio em ±2000 graus por segundo, os dois a 416 Hz.
+
+**Justificativa:** são as faixas máximas do LSM6DSO. Motores de foguetes amadores produzem acelerações de 5 a 15 g, com picos maiores na abertura do paraquedas, e o veículo pode girar rápido em torno do próprio eixo. A resolução que se perde, de 0,488 mg, é desprezível perto dessas grandezas, enquanto um sinal saturado não tem como ser recuperado depois. A taxa de 416 Hz descreve bem a dinâmica do voo e gera uns 40 kB/s de CSV, ou 144 MB por hora, um volume tranquilo para o cartão.
+
+## 20. Configuração do BME280
+
+**Decisão:** oversampling de 8 vezes na pressão, 2 vezes na temperatura e 1 vez na umidade, filtro IIR com coeficiente 4, modo normal e leitura a cada 40 ms.
+
+**Justificativa:** a pressão é a grandeza que dá a altitude, então ela recebeu o maior oversampling. O filtro com coeficiente 4 reduz o ruído sem atrasar demais a resposta durante a subida; coeficientes altos, como 16, acabam suavizando o apogeu. Com essa configuração, cada medição leva uns 28 ms (apêndice B do datasheet do BME280).
+
+## 21. CSV em ponto fixo, com uma linha por amostra do IMU
+
+**Decisão:** cada linha é uma amostra do IMU, acompanhada da última leitura do BME280 e da marcação `bme_novo`. Os valores são convertidos em texto a partir de inteiros, sem printf e sem ponto flutuante.
+
+**Justificativa:** um arquivo só, com uma base de tempo só, é o formato mais fácil de analisar, seja numa planilha ou no pandas. O printf da newlib nano não formata ponto flutuante por padrão, e a conversão a partir de inteiros é várias vezes mais rápida, o que faz diferença com 416 linhas por segundo.
+
+## 22. Sincronização do arquivo a cada segundo
+
+**Decisão:** chamar o f_sync a cada segundo e, entre uma sincronização e outra, juntar os dados em blocos de 4 kB.
+
+**Justificativa:** sem o f_sync, os dados ficam no buffer do FatFs e a tabela FAT não é atualizada. Uma queda de energia, como um cabo que solta ou o impacto no pouso, pode deixar o arquivo com tamanho zero. Sincronizando a cada segundo, a perda máxima fica em torno de 1 s de dados, com pouco custo de desempenho. Gravar em blocos de 4 kB, que são múltiplos de 512 bytes, diminui a quantidade de acessos ao cartão.
+
+## 23. Watchdog independente (IWDG)
+
+**Decisão:** IWDG de uns 8 s, configurado direto nos registradores e parado durante a depuração.
+
+**Justificativa:** se o firmware travar em voo, por um cartão que não responde ou qualquer falha inesperada, a placa reinicia sozinha e abre um arquivo novo, com "causa do reset: watchdog" no cabeçalho. Os 8 s ficam acima do pior caso de montagem de um cartão grande. O módulo do IWDG na HAL não estava habilitado no CubeMX, e configurar pelos registradores evitou mexer na configuração gerada.
+
+## 24. Base de tempo de 64 bits e acerto do relógio por arquivo
+
+**Decisão:** toda linha usa o `t_us`, que é o tempo em microssegundos desde que a placa ligou, contado pelo TIM2 e estendido para 64 bits no software. A data real vem do RTC e só aparece no cabeçalho, quando foi acertada pelo arquivo `RTC.TXT`.
+
+**Justificativa:** o TIM2 tem 32 bits e zera a cada 71 minutos, mais ou menos, e a placa pode ficar ligada na rampa mais tempo que isso antes do lançamento. Com a extensão para 64 bits, esse problema deixa de existir. O RTC não serve como base de tempo do voo porque o VBAT está ligado ao 3,3 V, e a hora se perde sempre que a placa desliga. Como a placa não tem botão nem serial para acertar a hora, um arquivo no cartão foi o jeito mais simples.
+
+## 25. Drivers independentes da HAL e testes no computador
+
+**Decisão:** os drivers do BME280 e do LSM6DSO, a formatação do CSV e a leitura do `RTC.TXT` não incluem nenhum arquivo da HAL. O acesso ao barramento é feito por ponteiros de função.
+
+**Justificativa:** assim essa parte do código compila e pode ser testada no computador ([`tests/`](../tests/)), sem precisar da placa. Os testes conferem a compensação do BME280 com o exemplo numérico da Bosch e com as fórmulas em ponto flutuante do datasheet, os registradores configurados, os casos de sensor ausente e de ID errado (com um barramento simulado), as conversões e a formatação. Eles rodam no GitHub Actions a cada push.
+
+**Fonte do exemplo numérico:** o datasheet do BME280 não traz um exemplo com números. As fórmulas de temperatura e pressão são as mesmas do BMP280, e o datasheet dele (BST-BMP280-DS001, seção 3.12) traz os valores de referência: 25,08 °C e 100653,27 Pa.
