@@ -11,3 +11,12 @@ hardware/fp-info-cache
 # Sistema
 desktop.ini
 Thumbs.db
+# Compilação pela linha de comando (Makefile)
+firmware/build/
+
+# Testes no computador
+tests/testes
+
+# Python
+__pycache__/
+*_voo.png
